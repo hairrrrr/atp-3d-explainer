@@ -29,7 +29,7 @@ function sprinkle(G,n,cx,cy,cz,sx,sy,sz,color,r){ for(let i=0;i<n;i++) ball(G,V(
   part(s,'res',[res,lvl],[addLabel(s,g,V(0,4.4,0),'体内水平衡','Body water')]);
   part(s,'drink',drink,[addLabel(s,g,V(-13,8.3,0),'饮水与饮料（约 70%）','Drinks','sm')]);
   part(s,'food',food,[addLabel(s,g,V(-13,2.3,0),'食物中的水（约 30%）','Food water','sm')]);
-  part(s,'met',met,[addLabel(s,g,V(-13,-6.4,0),'代谢水（3000 千卡 ≈ 0.3 升）','Metabolic water','sm')]);
+  part(s,'met',met,[addLabel(s,g,V(-10.5,-6.8,0),'代谢水（3000 千卡 ≈ 0.3 升）','Metabolic water','sm')]);
   part(s,'urine',urine,[addLabel(s,g,V(13,-7.4,0),'尿液（至少 0.3–0.6 升/天）','Urine','sm')]);
   part(s,'sweat',sweat,[addLabel(s,g,V(13,8.4,0),'汗液（训练约 1.5 升/小时）','Sweat','sm')]);
   part(s,'breath',breath,[addLabel(s,g,V(13,2.4,0),'呼吸与皮肤蒸发','Breath & skin','sm')]);
@@ -102,7 +102,7 @@ function sprinkle(G,n,cx,cy,cz,sx,sy,sz,color,r){ for(let i=0;i<n;i++) ball(G,V(
   bottle(-9,0x9ad6ff,'富钠矿泉水','Na⁺ 400–1100 mg/L','mineral',[[2.6,NA],[0.2,GL]]);
   bottle(0,0xffb36b,'果汁兑水 1:1–3:1','juice spritzer','spritzer',[[1.2,NA],[2.0,GL]]);
   bottle(9,0x7be08a,'运动饮料','Na⁺ ≥ 400 mg/L + 糖','sport',[[1.6,NA],[2.6,GL]]);
-  addLabel(s,g,V(-14.5,-2.4,0),'柱：钠 / 糖（示意）','bars: Na⁺ / sugar','sm tag');
+  addLabel(s,g,V(0,-5.4,0),'柱：钠 / 糖（示意）','bars: Na⁺ / sugar','sm tag');
 })();
 J.start();
 })(JIG,KIT);
