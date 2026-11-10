@@ -33,7 +33,7 @@ const {THREE,V,mat,ball,rod,tube,flow,curve,station,part,addLabel,sphereGeo}=J;
     if(f!=null){ const c=new THREE.Mesh(new THREE.BoxGeometry(2,1,2),mat(0xffd166)); g.add(c); bars.push([c,f,x+1.3]); addLabel(s,g,V(x+1.3,f*2-1,1.2),'体脂 '+f+' kg','','sm'); }
     addLabel(s,g,V(x-1.3,m*2+(m>0?1:-1),1.2),'肌肉 '+(m>0?'+':'')+m+' kg','','sm'); addLabel(s,g,V(x,-6.6,0),zh,en,'sm'); });
   part(s,'bars',bars.map(b=>b[0]),[addLabel(s,g,V(-12,8,0),'红：肌肉变化　黄：体脂变化（书中给出的数值）','10-week study','sm')]);
-  s.updates.push(t=>{ const k=Math.min(1,(t%7)/2.5); bars.forEach(([b,v,x])=>{ const h=Math.max(0.02,Math.abs(v)*2*k); b.scale.y=h; b.position.set(x,(v>0?1:-1)*h/2,0); }); });
+  s.updates.push(t=>{ const k=Math.min(1,0.3+(t%10)/2); bars.forEach(([b,v,x])=>{ const h=Math.max(0.02,Math.abs(v)*2*k); b.scale.y=h; b.position.set(x,(v>0?1:-1)*h/2,0); }); });
 })();
 // ===== 4. afterburn timeline =====
 (function(){
