@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>氨基酸与蛋白质结构 · 交互 3D 讲解</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><a class="toc" href="../topics.html">☰ 目录</a>氨基酸与蛋白质结构 <span>交互 3D 讲解 · Amino Acids & Protein Structure</span></div>
+    <div class="hint">拖动旋转 · 滚轮 / 双指缩放 · 右键 / 双指平移 · ← → 切换步骤</div>
+  </header>
+  <div id="stage">
+    <div id="canvas-wrap"></div>
+    <button id="reset-cam" title="复位视角">⟲ 复位视角</button>
+  </div>
+  <aside id="panel">
+    <div class="stepno" id="stepno"></div>
+    <h1 id="title"></h1>
+    <div class="en" id="en"></div>
+    <div class="body" id="body"></div>
+    <div class="fit" id="fit"></div>
+    <div class="flag" id="flag"></div>
+    <figure id="figure"></figure>
+    <div class="src" id="source"></div>
+    <div class="src">主要依据《健身营养全书：关于力量与肌肉的营养策略》（〔德〕克里斯蒂安·冯·勒费尔霍尔茨 著，庄仲华 译，北京科学技术出版社，2018），书中未展开的分子细节按通用生物化学教材补充。页码为书中印刷页码。</div>
+  </aside>
+  <nav id="nav">
+    <button id="prev" aria-label="上一步">‹ 上一步</button>
+    <div id="dots"></div>
+    <button id="next" aria-label="下一步">下一步 ›</button>
+  </nav>
+</div>
+
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/CSS2DRenderer.js"></script>
+<script src="content/steps.js"></script>
+<script src="lib.js"></script>
+<script src="kit.js"></script>
+<script src="content/mol.js"></script>
+<script src="molkit.js"></script>
+<script src="scene.js"></script>
+</body>
+</html>
