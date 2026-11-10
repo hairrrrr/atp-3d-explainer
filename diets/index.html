@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第 7 章 饮食法对比 · 交互讲解</title><link rel="icon" href="data:,">
+<style>
+:root{--bg:#0b1020;--panel:#111830;--ink:#e9eefc;--mut:#9fb0d8;--acc:#ffb547;--hl:#6ee7ff;--P:#ff8f6b;--C:#ffd166;--F:#6ea8ff;
+--font:"Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6}
+#top{position:sticky;top:0;z-index:5;background:#0b1020f2;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 18px;border-bottom:1px solid #ffffff14}
+.brand{font-weight:700;font-size:17px}.brand span{font-weight:400;color:var(--mut);font-size:13px;margin-left:8px}
+#top a.toc{color:var(--acc);text-decoration:none;font-weight:700;margin-right:14px;font-size:14px}
+main{max-width:1180px;margin:0 auto;padding:18px}
+.intro{color:var(--mut);font-size:14px;margin:4px 0 14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.bar button{background:#ffffff10;color:var(--ink);border:1px solid #ffffff22;border-radius:999px;padding:5px 12px;font:13px var(--font);cursor:pointer}
+.bar button.on{background:var(--acc);color:#1a1200;border-color:var(--acc);font-weight:700}
+.bar .lbl{color:var(--mut);font-size:13px;margin-right:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid #ffffff14;border-radius:14px;padding:14px 16px;position:relative}
+.card.sel{outline:2px solid var(--hl)}
+.card h3{margin:0 0 2px;font-size:17px}.card .en{color:var(--mut);font-size:12px}
+.row{display:flex;gap:12px;align-items:center;margin:10px 0}
+.macro{font-size:12.5px;color:var(--mut)}.macro b{color:var(--ink)}
+.tags span{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:#ffffff12;margin:0 4px 4px 0;color:#cfe1ff}
+.card dl{margin:6px 0 0;font-size:13.5px}.card dt{color:var(--acc);font-weight:700;margin-top:6px}.card dd{margin:0}
+.verdict{background:#1c2a1c;border:1px solid #3c6b3c;border-radius:10px;padding:7px 10px;margin-top:8px;font-size:13px}
+.flag{background:#2a2112;border:1px solid #6b5323;border-radius:10px;padding:7px 10px;margin-top:8px;font-size:13px}
+.flag:empty{display:none}
+.src{color:#a9b8de;font-size:12px;margin-top:8px}
+.cmpbtn{position:absolute;right:12px;top:12px;background:#ffffff10;color:var(--hl);border:1px solid #6ee7ff55;border-radius:8px;font:12px var(--font);padding:3px 8px;cursor:pointer}
+.legend{font-size:12px;color:var(--mut)}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
+#cmp{margin:22px 0 10px;overflow-x:auto}#cmp table{border-collapse:collapse;min-width:720px;width:100%;font-size:13px}
+#cmp th,#cmp td{border:1px solid #ffffff1c;padding:7px 9px;vertical-align:top;text-align:left}#cmp th{background:#16203d;color:var(--acc)}
+#cmp td:first-child{color:var(--mut);white-space:nowrap}
+h2{font-size:18px;margin:24px 0 6px}.foot{color:var(--mut);font-size:12px;margin:26px 0 40px}
+@media(max-width:700px){.brand span{display:none}.grid{grid-template-columns:1fr}main{padding:12px}}
+</style></head><body>
+<header id="top"><div class="brand"><a class="toc" href="../topics.html">☰ 目录</a>饮食法对比 <span>第 7 章 · Diet Strategies</span></div></header>
+<main>
+<p class="intro">书中评判一种好饮食法的三条标准：① 健康、没有已知风险；② 减脂时尽量保住肌肉，增肌时提供足够的原料；③ 能长期坚持，允许“灵活调控”。下面 9 种饮食法按书中内容整理。点卡片右上角的“对比”，最多可选 3 种，在下方表格中并排比较。</p>
+<div class="bar"><span class="lbl">目标：</span><button data-f="all" class="on">全部</button><button data-f="减脂">减脂</button><button data-f="增肌">增肌</button><button data-f="基础">长期基础饮食</button><button data-f="短期">只宜短期</button></div>
+<div class="legend">宏量营养素占热量比例（书中给出时）：<i style="background:var(--P)"></i>蛋白质<i style="background:var(--C)"></i>碳水<i style="background:var(--F)"></i>脂肪<i style="background:#3a4566"></i>书中未规定</div>
+<div class="grid" id="grid"></div>
+<h2>并排对比</h2><div id="cmp"><p class="intro">请在上方卡片中点“对比”。</p></div>
+<p class="foot">主要依据《健身营养全书：关于力量与肌肉的营养策略》（〔德〕克里斯蒂安·冯·勒费尔霍尔茨 著，庄仲华 译，北京科学技术出版社，2018）第 7 章。页码为书页页脚的印刷页码（= PDF 页 − 13）。“与现代证据的差异”为编者根据近年研究补充，不是书中观点。本页不构成医疗建议。</p>
+</main>
+<script src="data.js"></script>
+<script>
+const G=document.getElementById('grid'), CMP=document.getElementById('cmp'); let sel=[], filt='all';
+function donut(m){ const R=30,r=18,C=2*Math.PI; let a=-Math.PI/2, out='';
+  const seg=(v,col)=>{ if(!v) return; const b=a+v/100*C; const L=v>50?1:0; const p=(t,rr)=>[40+rr*Math.cos(t),40+rr*Math.sin(t)];
+    const [x1,y1]=p(a,R),[x2,y2]=p(b,R),[x3,y3]=p(b,r),[x4,y4]=p(a,r);
+    out+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${L} 1 ${x2} ${y2}L${x3} ${y3}A${r} ${r} 0 ${L} 0 ${x4} ${y4}Z" fill="${col}"/>`; a=b; };
+  const tot=(m.p||0)+(m.c||0)+(m.f||0); seg(m.p,'var(--P)'); seg(m.c,'var(--C)'); seg(m.f,'var(--F)'); if(tot<100) seg(100-tot,'#3a4566');
+  return `<svg width="80" height="80" viewBox="0 0 80 80" aria-label="宏量比例">${out}</svg>`; }
+function render(){ G.innerHTML=''; DIETS.forEach((d,i)=>{ if(filt!=='all' && !d.tags.includes(filt)) return;
+  const c=document.createElement('div'); c.className='card'+(sel.includes(i)?' sel':'');
+  c.innerHTML=`<button class="cmpbtn">${sel.includes(i)?'✓ 已选':'＋ 对比'}</button><h3>${d.name}</h3><div class="en">${d.en} · 第 ${d.sec} 节</div>
+  <div class="row">${donut(d.m)}<div class="macro">${d.macro}</div></div><div class="tags">${d.tags.map(t=>'<span>'+t+'</span>').join('')}</div>
+  <dl><dt>原理</dt><dd>${d.how}</dd><dt>优点</dt><dd>${d.pro}</dd><dt>缺点</dt><dd>${d.con}</dd><dt>适合谁</dt><dd>${d.who}</dd></dl>
+  <div class="verdict">📖 书中评价：${d.verdict}</div><div class="flag">${d.flag?'⚠ 与现代证据的差异：'+d.flag:''}</div><div class="src">出处：${d.src}</div>`;
+  c.querySelector('.cmpbtn').onclick=()=>{ const k=sel.indexOf(i); if(k>=0) sel.splice(k,1); else { if(sel.length>=3) sel.shift(); sel.push(i);} render(); };
+  G.appendChild(c); }); renderCmp(); }
+function renderCmp(){ if(!sel.length){ CMP.innerHTML='<p class="intro">请在上方卡片中点“对比”。</p>'; return; }
+  const rows=[['宏量营养素','macro'],['原理','how'],['优点','pro'],['缺点','con'],['适合谁','who'],['书中评价','verdict'],['现代证据','flag'],['出处','src']];
+  CMP.innerHTML='<table><tr><th></th>'+sel.map(i=>'<th>'+DIETS[i].name+'</th>').join('')+'</tr>'+rows.map(([n,k])=>'<tr><td>'+n+'</td>'+sel.map(i=>'<td>'+(DIETS[i][k]||'—')+'</td>').join('')+'</tr>').join('')+'</table>'; }
+document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); filt=b.dataset.f; render(); });
+sel=[0,3,4]; render();
+</script></body></html>
