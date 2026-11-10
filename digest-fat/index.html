@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>脂肪的消化吸收 · 交互 3D 讲解</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><a class="toc" href="../topics.html">☰ 目录</a>脂肪的消化吸收 <span>交互 3D 讲解 · Fat Digestion</span></div>
+    <div class="hint">拖动旋转 · 滚轮 / 双指缩放 · 右键 / 双指平移 · ← → 切换步骤</div>
+  </header>
+  <div id="stage">
+    <div id="canvas-wrap"></div>
+    <button id="reset-cam" title="复位视角">⟲ 复位视角</button>
+  </div>
+  <aside id="panel">
+    <div class="stepno" id="stepno"></div>
+    <h1 id="title"></h1>
+    <div class="en" id="en"></div>
+    <div class="body" id="body"></div>
+    <div class="fit" id="fit"></div>
+    <div class="flag" id="flag"></div>
+    <figure id="figure"></figure>
+    <div class="src" id="source"></div>
+    <div class="src">主要依据《健身营养全书：关于力量与肌肉的营养策略》（〔德〕克里斯蒂安·冯·勒费尔霍尔茨 著，庄仲华 译，北京科学技术出版社，2018），书中未展开的分子细节按通用生物化学教材补充。页码为书中印刷页码。</div>
+  </aside>
+  <nav id="nav">
+    <button id="prev" aria-label="上一步">‹ 上一步</button>
+    <div id="dots"></div>
+    <button id="next" aria-label="下一步">下一步 ›</button>
+  </nav>
+</div>
+
+<template id="svg-fatroute">
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<rect width="640" height="280" fill="#fff"/>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+<text x="20" y="26" font-size="14" fill="#555" font-weight="bold">Lumen</text>
+<rect x="110" y="50" width="300" height="150" rx="14" fill="#fbe7de" stroke="#d98b6a" stroke-width="3"/>
+<text x="260" y="70" text-anchor="middle" font-size="13" fill="#a0603f">Enterocyte</text>
+<circle cx="80" cy="40" r="16" fill="#ffd166" stroke="#7fbf5a" stroke-width="4"/><text x="80" y="18" text-anchor="middle" font-size="12">micelle</text>
+<path d="M98,48 L150,100" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<rect x="150" y="95" width="80" height="30" rx="6" fill="#6fa8ff"/><text x="190" y="115" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">FA → TG</text>
+<path d="M230,110 L265,110" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<circle cx="295" cy="110" r="24" fill="#fff1c4" stroke="#caa54a" stroke-width="2"/><text x="295" y="114" text-anchor="middle" font-size="11">CM</text>
+<text x="295" y="150" text-anchor="middle" font-size="11" fill="#555">TG + chol + PL + apoB-48</text>
+<path d="M295,136 L295,235" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<rect x="230" y="238" width="130" height="28" rx="12" fill="#eeeeff" stroke="#9999cc"/><text x="295" y="257" text-anchor="middle" font-size="13">Lymph (lacteal)</text>
+<circle cx="470" cy="40" r="10" fill="#ffb36b"/><text x="470" y="20" text-anchor="middle" font-size="12">SCFA / MCFA</text>
+<path d="M470,52 L470,230" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<rect x="415" y="238" width="120" height="28" rx="12" fill="#f1d3e6" stroke="#7d2f6b"/><text x="475" y="257" text-anchor="middle" font-size="13">Portal vein</text>
+<text x="560" y="257" font-size="13" fill="#555">→ Liver</text>
+</svg>
+</template>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/CSS2DRenderer.js"></script>
+<script src="content/steps.js"></script>
+<script src="lib.js"></script>
+<script src="kit.js"></script>
+<script src="scene.js"></script>
+</body>
+</html>
