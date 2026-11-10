@@ -1,5 +1,5 @@
 window.STEPS = [
-{ station:'beta', cam:[1,1,26], look:[1,0,0], hl:[],
+{ station:'beta', cam:[0,1,28], look:[0,0,0], hl:[],
   title:'β 细胞怎样“感知”血糖并释放胰岛素', en:'Glucose-stimulated insulin secretion',
   body:`<p>吃下高 GI（快速吸收）的碳水后血糖上升，胰岛 β 细胞按以下顺序释放胰岛素：</p>
 <ul><li>葡萄糖经 <b>GLUT2</b> 进入 β 细胞，被代谢，<b>ATP/ADP 比值升高</b>。</li>

@@ -16,7 +16,7 @@ function insulin(g,pos){ const m=new THREE.Group(); m.position.copy(pos); g.add(
   const cach=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,1.6,14,1,true),mat(0x6ee7ff,{side:THREE.DoubleSide})); cach.position.set(7.6,-2.5,0); cach.rotation.z=Math.PI/2-0.3; g.add(cach);
   const ca=flow(g,curve([V(11,-3.5,0),V(7.6,-2.5,0),V(5,-1.8,0)]),4,0.2,0x6ee7ff,0.35);
   const gran=[]; for(let i=0;i<14;i++){ const m=ball(g,V(0,0,0),0.45,INS,{emissive:0xffaa00,emissiveIntensity:0.35}); m.userData.p=[Math.random(),Math.random()*1.4-0.7]; gran.push(m);} 
-  part(s,'glut2',[glut2,fG],[addLabel(s,g,V(-10.5,3.6,0),'GLUT2：葡萄糖进入 β 细胞','Glucose sensing','sm')]);
+  part(s,'glut2',[glut2,fG],[addLabel(s,g,V(-8.5,4.4,0),'GLUT2：葡萄糖进入 β 细胞','Glucose sensing','sm')]);
   part(s,'mito',[mito,atp],[addLabel(s,g,V(-2,-2,0),'代谢 → ATP/ADP 比值升高','Metabolism → ATP↑','sm')]);
   part(s,'katp',katp,[addLabel(s,g,V(8.6,6.8,0),'K⁺(ATP) 通道关闭 → 膜去极化','K-ATP closes','sm')]);
   part(s,'ca',[cach,ca],[addLabel(s,g,V(10.5,-1.2,0),'Ca²⁺ 通道打开，Ca²⁺ 流入','Ca²⁺ influx','sm')]);
