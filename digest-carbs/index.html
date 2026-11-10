@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>碳水化合物的消化吸收 · 交互 3D 讲解</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><a class="toc" href="../topics.html">☰ 目录</a>碳水化合物的消化吸收 <span>交互 3D 讲解 · Carbohydrate Digestion</span></div>
+    <div class="hint">拖动旋转 · 滚轮 / 双指缩放 · 右键 / 双指平移 · ← → 切换步骤</div>
+  </header>
+  <div id="stage">
+    <div id="canvas-wrap"></div>
+    <button id="reset-cam" title="复位视角">⟲ 复位视角</button>
+  </div>
+  <aside id="panel">
+    <div class="stepno" id="stepno"></div>
+    <h1 id="title"></h1>
+    <div class="en" id="en"></div>
+    <div class="body" id="body"></div>
+    <div class="fit" id="fit"></div>
+    <div class="flag" id="flag"></div>
+    <figure id="figure"></figure>
+    <div class="src" id="source"></div>
+    <div class="src">主要依据《健身营养全书：关于力量与肌肉的营养策略》（〔德〕克里斯蒂安·冯·勒费尔霍尔茨 著，庄仲华 译，北京科学技术出版社，2018），书中未展开的分子细节按通用生物化学教材补充。页码为书中印刷页码。</div>
+  </aside>
+  <nav id="nav">
+    <button id="prev" aria-label="上一步">‹ 上一步</button>
+    <div id="dots"></div>
+    <button id="next" aria-label="下一步">下一步 ›</button>
+  </nav>
+</div>
+
+<template id="svg-transport">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+<rect width="640" height="300" fill="#fff"/>
+<text x="20" y="28" font-size="15" fill="#555" font-weight="bold">Lumen</text>
+<text x="20" y="290" font-size="15" fill="#555" font-weight="bold">Blood</text>
+<rect x="60" y="50" width="520" height="200" rx="14" fill="#fbe7de" stroke="#d98b6a" stroke-width="3"/>
+<text x="560" y="150" text-anchor="end" font-size="14" fill="#a0603f">Enterocyte</text>
+<rect x="150" y="38" width="44" height="26" rx="6" fill="#4a86ff"/><text x="172" y="56" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">SGLT1</text>
+<rect x="330" y="38" width="44" height="26" rx="6" fill="#43c06b"/><text x="352" y="56" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">GLUT5</text>
+<rect x="240" y="236" width="44" height="26" rx="6" fill="#ff9f6b"/><text x="262" y="254" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">GLUT2</text>
+<rect x="440" y="236" width="56" height="26" rx="6" fill="#8b5cf6"/><text x="468" y="254" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Na/K-ATPase</text>
+<defs><marker id="m1" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#333"/></marker></defs>
+<g stroke="#333" stroke-width="2" fill="none" marker-end="url(#m1)">
+<path d="M165,12 L165,90 C170,150 240,170 255,230"/><path d="M182,12 L182,80 C260,110 400,150 460,230"/>
+<path d="M352,12 L352,90 C340,160 290,180 272,230"/><path d="M262,262 L262,292"/>
+<path d="M480,262 L480,292"/><path d="M455,292 L455,266"/></g>
+<text x="120" y="22" font-size="13" fill="#2b5cd6">Glc / Gal</text><text x="190" y="22" font-size="13" fill="#333">Na+</text>
+<text x="362" y="22" font-size="13" fill="#2e9d3a">Fru</text>
+<text x="490" y="285" font-size="13" fill="#333">3 Na+ out</text><text x="395" y="285" font-size="13" fill="#333">2 K+ in</text>
+<text x="275" y="288" font-size="13" fill="#333">Glc, Gal, Fru</text>
+</svg>
+</template>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/CSS2DRenderer.js"></script>
+<script src="content/steps.js"></script>
+<script src="lib.js"></script>
+<script src="kit.js"></script>
+<script src="scene.js"></script>
+</body>
+</html>
