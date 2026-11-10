@@ -14,8 +14,8 @@ function dbHalos(m,c){ const G=new THREE.Group(); m.G.add(G); M.tagged(m,'db').f
 // 2 chain length
 (function(){ const s=station('len',V(60,0,0)), g=s.group;
   const a=M.mol(g,D.c4,V(-8.5,4,0),0.95), b=M.mol(g,D.c8,V(-6.3,0,0),0.95), c=M.mol(g,D.stearic,V(0,-4,0),0.95);
-  part(s,'short',[a.G],[addLabel(s,g,V(-8.5,6,0),'短链（< 6 个碳）：丁酸 C4','Short-chain','sm')]);
-  part(s,'mct',[b.G],[addLabel(s,g,V(-6.3,2,0),'中链（MCT）：辛酸 C8','Medium-chain','sm')]);
+  part(s,'short',[a.G],[addLabel(s,g,V(-8.5,6.6,0),'短链（< 6 个碳）：丁酸 C4','Short-chain','sm')]);
+  part(s,'mct',[b.G],[addLabel(s,g,V(-6.3,1.2,0),'中链（MCT）：辛酸 C8','Medium-chain','sm')]);
   part(s,'long',[c.G],[addLabel(s,g,V(0,-6.2,0),'长链：硬脂酸 C18','Long-chain','sm')]);
 })();
 // 3 sat / cis / trans
@@ -31,7 +31,7 @@ function dbHalos(m,c){ const G=new THREE.Group(); m.G.add(G); M.tagged(m,'db').f
   const a=M.mol(g,D.ala,V(0,5.5,0),0.85), b=M.mol(g,D.la,V(0,-5,0),0.85);
   const ha=dbHalos(a,0x6ee7ff), hb=dbHalos(b,0xffb36b);
   const nums=new THREE.Group(); g.add(nums); const L=[];
-  [[a,D.ala,[1,2,3],'ω'],[b,D.la,[1,6],'ω']].forEach(([m,d,ks])=>{ ks.forEach(k=>{ const i=heavyIdx(d,k-1); L.push(addLabel(s,g,M.wpos(m,i).add(V(0,1.3,0)),'ω'+k,'','sm')); }); });
+  [[a,D.ala,[[1,V(-1.8,0.4,0)],[3,V(0.9,2.0,0)]]],[b,D.la,[[1,V(0,1.3,0)],[6,V(0,1.3,0)]]]].forEach(([m,d,ks])=>{ ks.forEach(([k,o])=>{ const i=heavyIdx(d,k-1); L.push(addLabel(s,g,M.wpos(m,i).add(o),'ω'+k,'','sm')); }); });
   part(s,'ala',[a.G,ha],[addLabel(s,g,V(11,9,0),'α-亚麻酸（ALA）：第一个双键在 ω3','ω-3, C18:3','sm')]);
   part(s,'la',[b.G,hb],[addLabel(s,g,V(11,-0.6,0),'亚油酸（LA）：第一个双键在 ω6','ω-6, C18:2','sm')]);
   part(s,'num',[],L);
@@ -41,8 +41,8 @@ function dbHalos(m,c){ const G=new THREE.Group(); m.G.add(G); M.tagged(m,'db').f
 (function(){ const s=station('pack',V(60,0,-70)), g=s.group; const A=new THREE.Group(), B=new THREE.Group(); g.add(A); g.add(B);
   for(let i=0;i<5;i++) M.mol(A,D.stearic,V(0,4+i*0.55,i*0.9-1.8),0.55);
   for(let i=0;i<5;i++){ const m=M.mol(B,D.oleic,V(0,-5+i*0.9,i*1.1-2.2),0.55); m.G.rotation.x=i*1.1; }
-  part(s,'tight',A,[addLabel(s,g,V(-9,8,0),'饱和脂肪酸：直链排得紧密 → 室温固态','packs tightly: solid','sm')]);
-  part(s,'loose',B,[addLabel(s,g,V(-9,-7.6,0),'顺式不饱和：弯折排不紧 → 室温液态','kinks: liquid oil','sm')]);
+  part(s,'tight',A,[addLabel(s,g,V(-3,8.6,0),'饱和脂肪酸：直链排得紧密 → 室温固态','packs tightly: solid','sm')]);
+  part(s,'loose',B,[addLabel(s,g,V(1.5,-8.2,0),'顺式不饱和：弯折排不紧 → 室温液态','kinks: liquid oil','sm')]);
 })();
 // 6 triglyceride assembly
 (function(){ const s=station('tg',V(120,0,-70)), g=s.group;
