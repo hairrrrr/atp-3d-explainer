@@ -44,7 +44,7 @@ figcaption{font-size:13px;color:var(--mut);line-height:1.65;margin-top:6px}
   .hint{display:none}.brand span{display:none}
   #panel{border-left:0;border-top:1px solid #ffffff14;padding:14px 16px 20px}
   #panel h1{font-size:19px}.body{font-size:14.5px}
-  .lbl{font-size:11px;padding:2px 5px}.lbl span{font-size:9px}
+  .lbl{font-size:10px;padding:2px 4px;white-space:normal;max-width:118px}.lbl span{font-size:8.5px}
   #nav button{padding:8px 12px;font-size:13px}#dots{gap:6px}#nav .dot{width:9px;height:9px}
 }
 #top .brand a.toc{color:var(--acc);text-decoration:none;font-size:13px;font-weight:700;margin-right:10px;border:1px solid #ffb54766;border-radius:6px;padding:2px 8px}
