@@ -16,14 +16,15 @@ table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid 
 th{background:#16203d;color:var(--acc);cursor:pointer;user-select:none;position:sticky;top:52px}th:after{content:' ⇅';color:#ffffff44}
 td.n{font-weight:700;white-space:nowrap}.st{white-space:nowrap}.low{color:#ffb36b}.hi{color:#ff8a8a}.ok{color:#8fe3a0}
 .w{display:block;background:#2a2112;border:1px solid #6b5323;border-radius:8px;padding:4px 7px;margin-top:5px;font-size:12px}
+.ph{display:none}.bar select{background:#ffffff10;color:var(--ink);border:1px solid #ffffff2a;border-radius:8px;padding:6px 8px;font:13px var(--font)}.bar select option{background:#111830}
 .foot{color:var(--mut);font-size:12px;margin:24px 0 40px}
-@media(max-width:760px){.brand span{display:none}main{padding:10px}thead{display:none}table,tbody,tr,td{display:block;width:100%}tr{background:var(--panel);border:1px solid #ffffff1c;border-radius:12px;margin-bottom:10px;padding:6px 4px}td{border:0;padding:3px 8px}td:before{content:attr(data-h)'：';color:var(--acc);font-weight:700}td.n:before{content:''}td.n{font-size:16px}}
+@media(max-width:760px){.dk{display:none}span.ph{display:inline}select.ph{display:inline-block}.brand span{display:none}main{padding:10px}thead{display:none}table,tbody,tr,td{display:block;width:100%}tr{background:var(--panel);border:1px solid #ffffff1c;border-radius:12px;margin-bottom:10px;padding:6px 4px}td{border:0;padding:3px 8px}td:before{content:attr(data-h)'：';color:var(--acc);font-weight:700}td.n:before{content:''}td.n{font-size:16px}}
 </style></head><body>
 <header id="top"><div class="brand"><a class="toc" href="../topics.html">☰ 目录</a>维生素和矿物质速查表 <span>第 8 章 · Micronutrients</span></div></header>
 <main>
-<p class="intro">按书中第 8 章整理，内容为改写概括，并未逐项照搬书中表 19、表 20 的数值。“供给情况”是书中对德国人群的判断，不代表个人状况。点击表头可以排序，可以按名称、功能或食物搜索。</p>
+<p class="intro">按书中第 8 章整理，内容为改写概括，并未逐项照搬书中表 19、表 20 的数值。“供给情况”是书中对德国人群的判断，不代表个人状况。<span class="dk">点击表头可以排序，</span><span class="ph">可用下方“排序”菜单排序，</span>也可以按名称、功能或食物搜索。</p>
 <div class="key">📖 书中总体观点：饮食富于变化的运动者，即使在增肌期、即使进行竞技水平的训练，<b>也不需要</b>服用维生素和矿物质补充剂。例外是严苛、单一的减脂或竞赛饮食期（可以短期服用优质复合补充剂）、蛋奶素食者（碘、铁、锌、硒）、备孕女性（叶酸），以及经医生确诊的缺乏症。没有任何微量营养素能通过加大剂量而提升非缺乏者的运动表现。</div>
-<div class="bar"><input id="q" placeholder="搜索：如 铁、骨骼、海鱼…"><button data-t="all" class="on">全部</button><button data-t="脂溶性维生素">脂溶性维生素</button><button data-t="水溶性维生素">水溶性维生素</button><button data-t="常量元素">常量元素</button><button data-t="微量元素">微量元素</button><button data-t="low">供给偏低</button></div>
+<div class="bar"><input id="q" placeholder="搜索：如 铁、骨骼、海鱼…"><button data-t="all" class="on">全部</button><button data-t="脂溶性维生素">脂溶性维生素</button><button data-t="水溶性维生素">水溶性维生素</button><button data-t="常量元素">常量元素</button><button data-t="微量元素">微量元素</button><button data-t="low">供给偏低</button><select id="sortSel" class="ph"><option value="">排序：默认</option><option value="n">按名称</option><option value="t">按类别</option><option value="s">按供给判断</option></select></div>
 <table><thead><tr><th data-k="n">名称</th><th data-k="t">类别</th><th data-k="s">书中供给判断</th><th data-k="f">主要功能</th><th data-k="src">主要食物来源</th><th data-k="a">与运动者的关系</th><th data-k="v">书中补充剂观点</th></tr></thead><tbody id="tb"></tbody></table>
 <p class="foot">出处：《健身营养全书》第 8.2–8.4 节（第 315–326 页，PDF 第 328–339 页；表 19 在第 319–320 页，表 20 在第 322 页）。⚠ 为编者根据现代资料补充。免疫与抗氧化相关内容（第 8.4.2、8.4.4 节）另见专题。本页不构成医疗建议。</p>
 </main>
@@ -37,5 +38,6 @@ function render(){ const s=q.value.trim(); let L=MN.filter(x=>(T==='all'||x.t===
   tb.innerHTML=L.map(x=>`<tr><td class="n" data-h="名称">${x.n}</td><td data-h="类别">${x.t}</td><td class="st ${cls(x.s)}" data-h="供给">${x.s}</td><td data-h="功能">${x.f}</td><td data-h="来源">${x.src}</td><td data-h="运动者">${x.a}${x.w?'<span class="w">⚠ '+x.w+'</span>':''}</td><td data-h="补充剂">${x.v}</td></tr>`).join('')||'<tr><td colspan="7">没有匹配项</td></tr>'; }
 document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); T=b.dataset.t; render(); });
 document.querySelectorAll('th').forEach(th=>th.onclick=()=>{ const k=th.dataset.k; dir=(K===k)?-dir:1; K=k; render(); });
+document.getElementById("sortSel").onchange=e=>{K=e.target.value||null;dir=1;render();};
 q.oninput=render; render();
 </script></body></html>
