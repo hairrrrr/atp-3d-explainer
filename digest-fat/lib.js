@@ -90,7 +90,9 @@ function applyHighlight(s, hl){
     p.labels.forEach(l=>{ l.element.classList.toggle('dim', !on); l.element.classList.toggle('hl', !!strong); });
   });
 }
-function camTarget(st){ const s=STATIONS[st.station]; return { pos:s.center.clone().add(V(...st.cam)), look:s.center.clone().add(V(...st.look)) }; }
+function fitMul(){ const hf=Math.tan(camera.fov*Math.PI/360)*camera.aspect; return Math.min(1.6, Math.max(1, 0.70/hf)); }
+function camTarget(st){ const s=STATIONS[st.station]; const look=V(...st.look), off=V(...st.cam).sub(look).multiplyScalar(fitMul()*(st.zoom||1));
+  return { pos:s.center.clone().add(look).add(off), look:s.center.clone().add(look) }; }
 function go(i, instant){
   i=Math.max(0,Math.min(STEPS.length-1,i)); if(i===cur && !instant) return; cur=i;
   const st=STEPS[i], s=STATIONS[st.station];
@@ -119,7 +121,7 @@ window.addEventListener('keydown',e=>{ if(e.key==='ArrowRight') go(cur+1); if(e.
 window.goStep=(n)=>go(n-1,true);
 
 function resize(){ const w=wrap.clientWidth, h=wrap.clientHeight; renderer.setSize(w,h); labelRenderer.setSize(w,h); camera.aspect=w/h;
-  camera.fov = w/h<0.9? 60:45; camera.updateProjectionMatrix(); }
+  camera.fov = w/h<0.9? 60:45; camera.updateProjectionMatrix(); if(typeof cur!=='undefined' && cur>=0 && STEPS[cur]){ const tg=camTarget(STEPS[cur]); if(!tween){ camera.position.copy(tg.pos); controls.target.copy(tg.look);} } }
 window.addEventListener('resize',resize); resize();
 const ease=x=>x<0.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const clock=new THREE.Clock();
