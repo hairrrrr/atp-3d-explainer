@@ -385,7 +385,9 @@ function applyHighlight(s, hl){
     p.labels.forEach(l=>{ l.element.classList.toggle('dim', !on); l.element.classList.toggle('hl', !!strong); });
   });
 }
-function camTarget(st){ const s=STATIONS[st.station]; return { pos:s.center.clone().add(V(...st.cam)), look:s.center.clone().add(V(...st.look)) }; }
+function fitMul(){ const hf=Math.tan(camera.fov*Math.PI/360)*camera.aspect; return Math.min(1.6, Math.max(1, 0.70/hf)); }
+function camTarget(st){ const s=STATIONS[st.station]; const look=V(...st.look), off=V(...st.cam).sub(look).multiplyScalar(fitMul());
+  return { pos:s.center.clone().add(look).add(off), look:s.center.clone().add(look) }; }
 function go(i, instant){
   i=Math.max(0,Math.min(STEPS.length-1,i)); if(i===cur && !instant) return; cur=i;
   const st=STEPS[i], s=STATIONS[st.station];
