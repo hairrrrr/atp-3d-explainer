@@ -39,14 +39,14 @@ const {THREE,V,mat,ball,rod,tube,flow,curve,station,part,addLabel,sphereGeo}=J;
 (function(){
   const s=station('epoc',V(0,0,-80)), g=s.group;
   const X=h=>-12+Math.sqrt(h/48)*24; rod(g,V(-12,0,0),V(12.5,0,0),0.05,0xffffff,{opacity:0.5});
-  [0,1,2,6,12,24,48].forEach(h=>addLabel(s,g,V(X(h),-1,0),h+' h','','sm'));
+  [0,2,6,12,24,48].forEach(h=>addLabel(s,g,V(X(h),-1,0),h+' h','','sm'));
   const f=h=> h<0?0 : 6*Math.exp(-h/0.9)+1.6*Math.exp(-h/16);
   const pts=[]; for(let h=0;h<=48;h+=0.25) pts.push(V(X(h),0.1+f(h),0)); const ln=tube(g,pts,0.13,0xff9f6b,0.95);
   const p1=[]; for(let h=0;h<=6;h+=0.25) p1.push(V(X(h),0.1+6*Math.exp(-h/0.9),0.3)); const l1=tube(g,p1,0.08,0xff6b6b,0.8);
   const dot=ball(g,V(0,0,0),0.35,0xffffff,{emissive:0xffffff,emissiveIntensity:0.6});
-  part(s,'all',[ln.mesh,dot],[addLabel(s,g,V(X(20),3.2,0),'第二阶段：较弱，约 24 h，最长 48 h','Phase 2','sm tag')]);
-  part(s,'p1',l1.mesh,[addLabel(s,g,V(X(5),6.4,0),'第一阶段：剧烈，约 2 h（乳酸清除、补肌酸、降体温）','Phase 1','sm tag')]);
-  addLabel(s,g,V(-8,8.5,0),'↑ 高于静息的额外能耗（示意，时间轴为平方根刻度）','EPOC','sm');
+  part(s,'all',[ln.mesh,dot],[addLabel(s,g,V(X(30),3.0,0),'第二阶段：较弱，24–48 h','Phase 2','sm tag')]);
+  part(s,'p1',l1.mesh,[addLabel(s,g,V(X(9),5.6,0),'第一阶段：剧烈，约 2 h','Phase 1','sm tag')]);
+  addLabel(s,g,V(-6,9.5,0),'额外能耗（示意，平方根时间轴）','EPOC','sm');
   s.updates.push(t=>{ const h=(t*4)%48; dot.position.set(X(h),0.1+f(h),0); });
 })();
 // ===== 5. TEF bars + water =====
