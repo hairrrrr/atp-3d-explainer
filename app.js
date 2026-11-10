@@ -122,7 +122,7 @@ function addLabel(s, parent, pos, zh, en, cls){ const l=label(parent,pos,zh,en,c
   part(s,'ck',ck,[addLabel(s,g,V(0,-2.4,0),'肌酸激酶','Creatine kinase (CK)')]);
   part(s,'adp',adp,[addLabel(s,g,V(4.8,-1.6,0),'ADP → ATP','')]);
   part(s,'pmove',P,[addLabel(s,g,V(0,4.3,0),'磷酸基团转移','Phosphate transfer','sm')]);
-  part(s,'bars',bars,[addLabel(s,g,V(-10.2,-5,0),'ATP 储量','','sm'),addLabel(s,g,V(-7.8,-0.1,0),'PCr ≈ 3–4×','','sm')]);
+  part(s,'bars',bars,[addLabel(s,g,V(-10.2,-5,0),'ATP：1~2 秒','','sm'),addLabel(s,g,V(-7.8,-0.1,0),'PCr：约 4~5 千卡','','sm')]);
   s.updates.push(t=>{ const c=(t%3)/3; const u=Math.min(1,Math.max(0,(c-0.15)/0.6)); P.position.copy(path.getPointAt(u)); ck.rotation.y=t*0.4; ck.rotation.x=t*0.2;});
 })();
 
@@ -346,25 +346,28 @@ function capsulePts(R,L,n){ const p=[]; for(let i=0;i<=n;i++){const a=i/n*Math.P
   });
 })();
 
-// ===== Summary: three energy systems =====
+// ===== Summary: ATP donors (after the book's Table 13) =====
 (function(){
   const s=station('sum', V(60,0,-240)), g=s.group;
-  const X=t=>-13+26*Math.log10(t)/Math.log10(3600);
-  const axis=new THREE.Mesh(new THREE.BoxGeometry(27,0.12,0.12),mat(0xffffff,{opacity:0.6})); axis.position.set(0,0,0); g.add(axis);
-  [[1,'1 秒'],[10,'10 秒'],[60,'1 分'],[120,'2 分'],[600,'10 分'],[3600,'1 小时']].forEach(([t,l])=>{ const m=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.6,0.08),mat(0xffffff)); m.position.set(X(t),0,0); g.add(m); addLabel(s,g,V(X(t),-0.9,0),l,'','sm'); });
-  addLabel(s,g,V(0,-2.2,0),'全力运动持续时间（对数刻度）','Duration of maximal effort','sm');
-  addLabel(s,g,V(-15.5,7,0),'↑ 供能速率','ATP rate (power)','sm');
+  const TMAX=10800, X=t=>-13+26*Math.log10(t)/Math.log10(TMAX);
+  const axis=new THREE.Mesh(new THREE.BoxGeometry(27,0.12,0.12),mat(0xffffff,{opacity:0.6})); g.add(axis);
+  [[1,'1 秒'],[10,'10 秒'],[30,'30 秒'],[180,'3 分'],[3600,'60 分'],[10800,'3 小时']].forEach(([t,l])=>{ const m=new THREE.Mesh(new THREE.BoxGeometry(0.08,0.6,0.08),mat(0xffffff)); m.position.set(X(t),0,0); g.add(m); addLabel(s,g,V(X(t),-0.9,0),l,'','sm'); });
+  addLabel(s,g,V(0,-2.2,0),'运动持续时间（对数刻度）','Duration','sm');
+  addLabel(s,g,V(-15.5,9.5,0),'↑ 每分钟最大产能','kcal/min（书中表 13）','sm');
   function band(t0,t1,h,z,color){ const x0=X(t0), x1=X(t1); const sh=new THREE.Shape();
-    sh.moveTo(x0,0); sh.bezierCurveTo(x0+0.6,h, x0+0.6,h, x0+1.5,h); sh.lineTo(x1-2.5,h); sh.bezierCurveTo(x1-1,h, x1-0.5,h*0.2, x1,0); sh.lineTo(x0,0);
-    const m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:1.2,bevelEnabled:true,bevelSize:0.12,bevelThickness:0.12,bevelSegments:2}),mat(color,{opacity:0.82})); m.position.z=z; g.add(m); return m; }
-  const b1=band(1,15,9,1.6,0xff5a5a), b2=band(4,180,6,0,0xffa23b), b3=band(30,3600,3.6,-1.6,0x4a9dff);
-  part(s,'phos',b1,[addLabel(s,g,V(X(3),9.9,2.2),'磷酸原系统','ATP–PCr · ~0–10 s')]);
-  part(s,'glyc',b2,[addLabel(s,g,V(X(40),6.9,0.6),'糖酵解系统','Glycolytic · ~10 s–2 min')]);
-  part(s,'oxid',b3,[addLabel(s,g,V(X(700),4.5,-1),'有氧氧化系统','Oxidative · >2 min')]);
-  const cursor=new THREE.Mesh(new THREE.BoxGeometry(0.12,11,5),mat(0xffffff,{opacity:0.18,depthWrite:false})); cursor.position.y=5.5; g.add(cursor);
-  const crossover=new THREE.Mesh(new THREE.BoxGeometry(0.06,8,0.06),mat(0x6ee7ff)); crossover.position.set(X(75),4,1.9); g.add(crossover);
-  addLabel(s,g,V(X(75),-3.4,1.9),'~75 秒：有氧≈无氧','crossover','sm tag');
-  s.updates.push(t=>{ const u=(t*0.08)%1; cursor.position.x=-13+26*u; });
+    sh.moveTo(x0,0); sh.bezierCurveTo(x0+0.5,h, x0+0.5,h, x0+1.2,h); sh.lineTo(x1-1.6,h); sh.bezierCurveTo(x1-0.7,h, x1-0.3,h*0.2, x1,0); sh.lineTo(x0,0);
+    const m=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:1.0,bevelEnabled:true,bevelSize:0.1,bevelThickness:0.1,bevelSegments:2}),mat(color,{opacity:0.82})); m.position.z=z; g.add(m); return m; }
+  const k=0.16; // 58, 54(36~54), 18, 9 kcal/min
+  const b1=band(1,30,58*k,2.4,0xff5a5a), b2=band(3,180,45*k,0.8,0xffa23b), b3=band(150,5400,18*k,-0.8,0x4a9dff), b4=band(1200,10800,9*k,-2.4,0xf2d14b);
+  part(s,'phos',b1,[addLabel(s,g,V(X(4),58*k+0.9,2.9),'磷酸肌酸','≈58 kcal/min · ≤30 s')]);
+  part(s,'glyc',b2,[addLabel(s,g,V(X(40),45*k+0.9,1.3),'葡萄糖无氧燃烧','36–54 kcal/min · ≤3 min')]);
+  part(s,'oxid',b3,[addLabel(s,g,V(X(900),18*k+0.9,-0.3),'葡萄糖有氧燃烧','≈18 kcal/min · 3–90 min')]);
+  part(s,'fat',b4,[addLabel(s,g,V(X(7000),9*k+2.4,-1.9),'脂肪燃烧','≈9 kcal/min · 60 min 后为主')]);
+  const cursor=new THREE.Mesh(new THREE.BoxGeometry(0.12,11,6),mat(0xffffff,{opacity:0.16,depthWrite:false})); cursor.position.y=5.5; g.add(cursor);
+  const crossover=new THREE.Mesh(new THREE.BoxGeometry(0.06,8,0.06),mat(0x6ee7ff)); crossover.position.set(X(75),4,2.9); g.add(crossover);
+  addLabel(s,g,V(X(75),-3.4,2.9),'~75 秒：有氧≈无氧（Gastin 2001）','modern estimate','sm tag');
+  addLabel(s,g,V(9,10,0),'各途径之间自然过渡，不能孤立看待','','sm tag');
+  s.updates.push(t=>{ const u=(t*0.07)%1; cursor.position.x=-13+26*u; });
 })();
 
 // ---------- step logic ----------
@@ -399,7 +402,7 @@ function go(i, instant){
   if(st.figure){ if(st.figure.svg){ fig.innerHTML=document.getElementById(st.figure.svg).innerHTML; }
     else { const im=document.createElement('img'); im.src=st.figure.src; im.alt=st.title; fig.appendChild(im); }
     const cap=document.createElement('figcaption'); cap.textContent=st.figure.caption; fig.appendChild(cap); }
-  if(st.source){ const sc=document.createElement('div'); sc.className='src'; sc.textContent=st.source; fig.appendChild(sc); }
+  $('flag').textContent=st.flag||''; $('source').textContent=st.source||'';
   $('panel').scrollTop=0;
   [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
   $('prev').disabled=i===0; $('next').disabled=i===STEPS.length-1;

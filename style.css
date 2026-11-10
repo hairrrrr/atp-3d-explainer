@@ -22,6 +22,10 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family
 .fit{margin-top:14px;background:#2a7a5a33;border:1px solid #3fd19a55;border-radius:8px;padding:10px 12px;font-size:14px;line-height:1.7}
 .fit:before{content:"健身关联 · ";color:#5ff0b5;font-weight:700}
 .fit:empty{display:none}
+.flag{margin-top:12px;background:#7a5a2a33;border:1px solid #ffb54766;border-radius:8px;padding:10px 12px;font-size:13.5px;line-height:1.7}
+.flag:before{content:"⚠ 与现代共识的差异 · ";color:#ffc76b;font-weight:700}
+.flag:empty{display:none}
+#source{color:#a9b8de;margin-top:12px}#source:empty{display:none}
 figure{margin:16px 0 0}figure:empty{display:none}
 figure img,figure svg{width:100%;height:auto;border-radius:8px;background:#fff;display:block}
 figcaption{font-size:13px;color:var(--mut);line-height:1.65;margin-top:6px}
