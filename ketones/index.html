@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>酮体与高脂低碳饮食 · 交互 3D 讲解</title>
+<link rel="stylesheet" href="../shared/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <div class="brand"><a class="toc" href="../topics.html">目录</a>酮体与高脂低碳饮食 <span>交互 3D 讲解 · Ketones & low-carb diets</span></div>
+    <div class="hint">拖动旋转 · 滚轮 / 双指缩放 · 右键 / 双指平移 · ← → 切换步骤</div>
+  </header>
+  <div id="stage">
+    <div id="canvas-wrap"></div>
+    <button id="reset-cam" title="复位视角">⟲ 复位视角</button>
+  </div>
+  <aside id="panel">
+    <div class="stepno" id="stepno"></div>
+    <h1 id="title"></h1>
+    <div class="en" id="en"></div>
+    <div class="body" id="body"></div>
+    <div class="fit" id="fit"></div>
+    <div class="flag" id="flag" style="display:none"></div>
+    <div id="extra"></div>
+    <figure id="figure"></figure>
+    <div class="src">依据：克里斯蒂安·冯·勒费尔霍尔茨《健身营养全书》（2018 中译本）。页码为书页脚印刷页码；书中未展开的机制按通用生理学/生物化学教科书补充，并在每步注明。</div>
+  </aside>
+  <nav id="nav">
+    <button id="prev" aria-label="上一步">‹ 上一步</button>
+    <div id="dots"></div>
+    <button id="next" aria-label="下一步">下一步 ›</button>
+  </nav>
+</div>
+
+<script src="../shared/three.min.js"></script>
+<script src="../shared/OrbitControls.js"></script>
+<script src="../shared/CSS2DRenderer.js"></script>
+<script src="../shared/engine.js"></script>
+<script src="content/steps.js"></script>
+<script src="scene.js"></script>
+
+<script>J.start();</script>
+</body>
+</html>
