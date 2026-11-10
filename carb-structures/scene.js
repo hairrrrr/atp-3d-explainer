@@ -60,7 +60,7 @@ function unit(G,p,c){ return prism(G,p,0.55,6,0.3,c); }
 (function(){ const s=station('fiber',V(120,0,-70)), g=s.group; const C=new THREE.Group(); g.add(C); const H=new THREE.Group(); g.add(H);
   for(let r=0;r<4;r++) for(let i=0;i<16;i++){ const u=unit(C,V(-8+i*1.1,-2.4+r*1.6,0),0x8fd16a); u.rotation.z=(i%2)*Math.PI; u.position.z=(i%2)*0.15; }
   for(let r=0;r<3;r++) for(let i=0;i<16;i+=2){ const a=V(-8+i*1.1,-2.4+r*1.6+0.45,0), b=V(-8+i*1.1,-2.4+(r+1)*1.6-0.45,0); rod(H,a,b,0.05,0x6ee7ff,{opacity:0.7}); }
-  part(s,'cell',C,[addLabel(s,g,V(-9,4.4,0),'纤维素：β-1,4 连成直链，单元交替翻转','Cellulose: β-1,4','sm')]);
+  part(s,'cell',C,[addLabel(s,g,V(-5,4.6,0),'纤维素：β-1,4 连成直链，单元交替翻转','Cellulose: β-1,4','sm')]);
   part(s,'hb',H,[addLabel(s,g,V(9.5,0,0),'链间氢键 → 紧密纤维','H-bonded sheets','sm')]);
   addLabel(s,g,V(0,-5.4,0),'人体没有切 β-1,4 键的酶 → 进入大肠','no human β-glucosidase for cellulose','sm tag');
 })();
