@@ -58,3 +58,6 @@ table.mini{border-collapse:collapse;width:100%;font-size:13px;margin:.5em 0}
 table.mini td,table.mini th{border:1px solid #ffffff22;padding:4px 6px;text-align:left}
 .flag{margin-top:10px;background:#7a2a2a33;border:1px solid #ff8a8a55;border-radius:8px;padding:8px 12px;font-size:13.5px;line-height:1.65}
 .flag:before{content:"书与当前共识的差异 · ";color:#ff9c9c;font-weight:700}
+
+/* 手机：淡化（非当前重点）的标签只保留中文，减少拥挤 */
+@media (max-width:820px){ .lbl.dim span{display:none} }

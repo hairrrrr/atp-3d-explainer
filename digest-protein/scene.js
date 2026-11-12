@@ -84,8 +84,16 @@ const AA=[0x4a86ff,0x43c06b,0xffc857,0xff6b6b,0xb07cff,0x5fd3b0,0xff9f6b];
   const bars=new THREE.Group(); g.add(bars); const L=[];
   data.forEach(([n,v,c],i)=>{ const h=v*0.08; const b=new THREE.Mesh(new THREE.BoxGeometry(1.3,h,1.3),mat(c)); b.position.set(-11+i*2.45,h/2,0); bars.add(b); L.push(addLabel(s,g,V(-11+i*2.45,h+0.9,0),n,String(v),'sm')); });
   const ref=new THREE.Mesh(new THREE.BoxGeometry(26,0.05,1.8),mat(0xffffff,{opacity:0.5})); ref.position.y=8; g.add(ref);
-  part(s,'bars',bars,L); addLabel(s,g,V(9,9.6,0),'基准：全鸡蛋 = 100','reference','sm tag');
-  addLabel(s,g,V(0,-1.6,0),'生物价（BV，书中表 11 部分数据）','Biological value','sm');
+  const D=[addLabel(s,g,V(9,9.6,0),'基准：全鸡蛋 = 100','reference','sm tag'), addLabel(s,g,V(0,-1.6,0),'生物价（BV，书中表 11 部分数据）','Biological value','sm')];
+  // 手机竖屏专用排版：同一组数据改成横向条形图，食物名在左侧一行一个，避免柱顶标签挤在一起
+  const hb=new THREE.Group(); g.add(hb); const HL=[], X0=-6, K=0.11, Y0=16.4, DY=2.35;
+  data.forEach(([n,v,c],i)=>{ const w=v*K, y=Y0-i*DY; const b=new THREE.Mesh(new THREE.BoxGeometry(w,1.3,1.3),mat(c)); b.position.set(X0+w/2,y,0); hb.add(b);
+    HL.push(addLabel(s,g,V(X0-4.6,y,0),n+'　'+v,'','sm')); });
+  const href=new THREE.Mesh(new THREE.BoxGeometry(0.06,DY*10+0.6,1.8),mat(0xffffff,{opacity:0.5})); href.position.set(X0+100*K,Y0-DY*4.5,0); hb.add(href);
+  const HD=[addLabel(s,g,V(X0+100*K,Y0-DY*9-2.4,0),'基准：全鸡蛋 = 100','reference','sm tag'), addLabel(s,g,V(-2,Y0+2.7,0),'生物价（BV，书中表 11 部分数据）','Biological value','sm')];
+  part(s,'bars',[bars,hb],L.concat(HL));
+  const mq=window.matchMedia('(max-width:820px)');
+  s.updates.push(()=>{ const nar=mq.matches; bars.visible=ref.visible=!nar; hb.visible=nar; L.concat(D).forEach(l=>l.visible=!nar); HL.concat(HD).forEach(l=>l.visible=nar); });
 })();
 // 7. whey vs casein kinetics
 (function(){ const s=station('kin',V(0,0,-160)), g=s.group;

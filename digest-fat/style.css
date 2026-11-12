@@ -52,3 +52,6 @@ figcaption{font-size:13px;color:var(--mut);line-height:1.65;margin-top:6px}
   #nav button{padding:8px 12px;font-size:13px}#dots{gap:6px}#nav .dot{width:9px;height:9px}
 }
 #top a.toc{color:var(--acc);text-decoration:none;font-weight:700;margin-right:14px;font-size:14px}
+
+/* 手机：标签可换行；淡化（非当前重点）的标签只保留中文，减少拥挤 */
+@media (max-width:820px){ .lbl{white-space:normal;max-width:124px} .lbl.dim span{display:none} }

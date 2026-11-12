@@ -125,6 +125,32 @@ function resize(){ const w=wrap.clientWidth, h=wrap.clientHeight; renderer.setSi
 window.addEventListener('resize',resize); resize();
 const ease=x=>x<0.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const clock=new THREE.Clock();
+// 标签防裁切/防重叠：每帧在 CSS2D 定位之后，把当前站点的可见标签夹回舞台内，并按优先级（高亮 > 普通 > 淡化）
+// 逐个放到离原锚点最近、且不与已放标签重叠的位置。不出界、不重叠的标签位置与原来完全一致。
+const _lv=new THREE.Vector3(); let _fitKey='', _fitOut=null; const _fitOff=[];
+for(let dy=-240;dy<=240;dy+=3) for(let dx=-300;dx<=300;dx+=4) _fitOff.push([dx,dy,dx*dx*1.6+dy*dy]);
+_fitOff.sort((a,b)=>a[2]-b[2]);
+function fitLabels(s){
+  const W=wrap.clientWidth, H=wrap.clientHeight; if(!W||!H) return;
+  const m=W<600?3:6, gap=3, L=[];
+  [...new Set(s.labels)].forEach((o,idx)=>{ const e=o.element; if(!o.visible||e.style.display==='none') return; // part() 与 addLabel() 会重复登记同一标签，先去重
+    const w=e.offsetWidth, h=e.offsetHeight; if(!w) return;
+    _lv.setFromMatrixPosition(o.matrixWorld).project(camera);
+    L.push({e,idx,ax:(_lv.x*0.5+0.5)*W,ay:(-_lv.y*0.5+0.5)*H,w,h,p:e.classList.contains('hl')?0:e.classList.contains('dim')?2:1}); });
+  const key=W+'x'+H+'|'+L.map(l=>l.idx+':'+l.ax.toFixed(1)+','+l.ay.toFixed(1)+','+l.w+','+l.h+','+l.p).join(';');
+  if(key!==_fitKey){ _fitKey=key;
+    const placed=[], rb=document.getElementById('reset-cam'); // 复位按钮也当作障碍物，标签不压在按钮上
+    if(rb&&rb.offsetWidth){ const wr=wrap.getBoundingClientRect(), r=rb.getBoundingClientRect(); placed.push({x:r.left-wr.left+r.width/2,y:r.top-wr.top+r.height/2,w:r.width,h:r.height}); }
+    const hit=(x,y,l)=>placed.some(q=>Math.abs(x-q.x)<(l.w+q.w)/2+gap && Math.abs(y-q.y)<(l.h+q.h)/2+gap);
+    const cx=(l,x)=>Math.min(Math.max(x,l.w/2+m),Math.max(l.w/2+m,W-l.w/2-m)), cy=(l,y)=>Math.min(Math.max(y,l.h/2+m),Math.max(l.h/2+m,H-l.h/2-m));
+    L.slice().sort((a,b)=>a.p-b.p||a.idx-b.idx).forEach(l=>{
+      const bx=cx(l,l.ax), by=cy(l,l.ay); let X=bx, Y=by;
+      if(hit(bx,by,l)){ for(const [dx,dy] of _fitOff){ const x=cx(l,bx+dx), y=cy(l,by+dy); if((x!==bx+dx)||(y!==by+dy)) continue; if(!hit(x,y,l)){ X=x; Y=y; break; } } }
+      l.x=X; l.y=Y; placed.push(l); });
+    _fitOut=L; }
+  else L.forEach((l,i)=>{ l.x=_fitOut[i].x; l.y=_fitOut[i].y; });
+  L.forEach(l=>{ if(Math.abs(l.x-l.ax)>0.3||Math.abs(l.y-l.ay)>0.3) l.e.style.transform='translate(-50%,-50%) translate('+l.x.toFixed(1)+'px,'+l.y.toFixed(1)+'px)'; });
+}
 function loop(){
   requestAnimationFrame(loop);
   const t=clock.getElapsedTime();
@@ -133,7 +159,7 @@ function loop(){
   controls.update();
   const s=STATIONS[STEPS[cur].station];
   s.updates.forEach(f=>f(t)); s.group.traverse(o=>{ if(o.userData.update) o.userData.update(t); });
-  renderer.render(scene,camera); labelRenderer.render(scene,camera);
+  renderer.render(scene,camera); labelRenderer.render(scene,camera); fitLabels(s);
 }
 const m=location.hash.match(/step=(\d+)/); go(m?parseInt(m[1])-1:0, true);
 loop();
