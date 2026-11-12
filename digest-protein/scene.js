@@ -90,7 +90,7 @@ const AA=[0x4a86ff,0x43c06b,0xffc857,0xff6b6b,0xb07cff,0x5fd3b0,0xff9f6b];
   data.forEach(([n,v,c],i)=>{ const w=v*K, y=Y0-i*DY; const b=new THREE.Mesh(new THREE.BoxGeometry(w,1.3,1.3),mat(c)); b.position.set(X0+w/2,y,0); hb.add(b);
     HL.push(addLabel(s,g,V(X0-4.6,y,0),n+'　'+v,'','sm')); });
   const href=new THREE.Mesh(new THREE.BoxGeometry(0.06,DY*10+0.6,1.8),mat(0xffffff,{opacity:0.5})); href.position.set(X0+100*K,Y0-DY*4.5,0); hb.add(href);
-  const HD=[addLabel(s,g,V(X0+100*K,Y0-DY*9-2.4,0),'基准：全鸡蛋 = 100','reference','sm tag'), addLabel(s,g,V(-2,Y0+2.7,0),'生物价（BV，书中表 11 部分数据）','Biological value','sm')];
+  const HD=[addLabel(s,g,V(X0+100*K,Y0-DY*9-2.4,0),'基准：全鸡蛋 = 100','reference','sm tag'), addLabel(s,g,V(13.5,Y0-DY*4.5,0),'生物价（BV，书中表 11 部分数据）','Biological value','sm')];
   part(s,'bars',[bars,hb],L.concat(HL));
   const mq=window.matchMedia('(max-width:820px)');
   s.updates.push(()=>{ const nar=mq.matches; bars.visible=ref.visible=!nar; hb.visible=nar; L.concat(D).forEach(l=>l.visible=!nar); HL.concat(HD).forEach(l=>l.visible=nar); });
